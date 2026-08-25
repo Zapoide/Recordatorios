@@ -544,8 +544,10 @@ class ReminderApp(tk.Tk):
 
     def toggle_autostart(self):
         app_name = "Kahatsa"
-        script_path = os.path.abspath(sys.argv[0])
-        python_path = sys.executable
+        script_path = os.path.abspath(__file__)
+        python_path = sys.executable.replace("python.exe", "pythonw.exe")
+        if not os.path.exists(python_path):
+            python_path = sys.executable
         command = f'"{python_path}" "{script_path}"'
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
                              r"Software\Microsoft\Windows\CurrentVersion\Run",
